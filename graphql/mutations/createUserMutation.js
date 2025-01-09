@@ -12,7 +12,6 @@ const createUserMutationResolver = async (_, { user }, context) => {
     });
 
     return createdUser;
-    
 }
 
 const createUserMutation = {

@@ -1,8 +1,10 @@
 import express from 'express';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { GraphQLSchema } from 'graphql'
+import queryType from './graphql/rootTypes/queryType.js'
+import mutationType from './graphql/rootTypes/mutationType.js'
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from './constants';
+import { JWT_SECRET } from './constants.js';
 
 const schema = new GraphQLSchema({ 
     query: queryType,
@@ -10,10 +12,6 @@ const schema = new GraphQLSchema({
 })
 
 const app = express();
-
-app.get((req, res) => {
-    res.send("ok");
-});
 
 const jwtMiddleware = (req, res, next) => {
     const token = req.headers.authorization?.replace("Bearer ", "");
@@ -34,9 +32,13 @@ const jwtMiddleware = (req, res, next) => {
     }
 }
 
+app.get((req, res) => {
+    res.send("ok");
+});
+
 app.all(
     "/graphql",
-    // jwtMiddleware,
+    jwtMiddleware,
     createHandler({
         schema: schema,
         context: (req) => {
