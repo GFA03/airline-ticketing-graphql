@@ -2,11 +2,11 @@ import {GraphQLBoolean, GraphQLInt} from 'graphql';
 import db from '../../models/index.js';
 
 const deleteUserResolver = async (_, args, context) => {
-    // const isAuthorized = !!context.user_id
+    const isAuthorized = !!context.userId
    
-    // if(!isAuthorized) {
-    //     return false;
-    // }
+    if(!isAuthorized) {
+        return false;
+    }
 
     const user = await db.User.findOne({
         where: {
