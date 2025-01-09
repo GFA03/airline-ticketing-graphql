@@ -3,6 +3,7 @@ import createUserMutation from '../mutations/createUserMutation.js';
 import updateUserMutation from '../mutations/updateUserMutation.js';
 import deleteUserMutation from '../mutations/deleteUserMutation.js';
 import loginMutation from '../mutations/loginMutation.js';
+import createFlightMutation from '../mutations/createFlightMutation.js';
 
 // Define the Mutation type
 const mutationType = new graphql.GraphQLObjectType({
@@ -11,7 +12,8 @@ const mutationType = new graphql.GraphQLObjectType({
         createUser: createUserMutation,
         updateUser: updateUserMutation,
         deleteUser: deleteUserMutation,
-        login: loginMutation
+        login: loginMutation,
+        createFlight: createFlightMutation,
     }
 });
 
