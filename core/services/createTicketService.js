@@ -1,6 +1,7 @@
 import db from "../../models/index.js";
 
 export const createTicket = async (_, { ticket, userId }, context) => {
+   
     // Check if the flight exists
     const flight = await db.Flight.findOne({
         where: {
@@ -9,6 +10,25 @@ export const createTicket = async (_, { ticket, userId }, context) => {
     })
 
     if (!flight) {
+        return null;
+    }
+
+    // Check if flight is departed already
+    const nowDate = new Date();
+
+    if (nowDate >= flight.departureTime) {
+        return null;
+    }
+
+    // Check if user already has a ticket for the flight
+    const existingTicket = await db.Ticket.findOne({
+        where: {
+            userId: userId,
+            flightId: ticket.flightId,
+        }
+    });
+
+    if (existingTicket) {
         return null;
     }
 
@@ -22,7 +42,6 @@ export const createTicket = async (_, { ticket, userId }, context) => {
     if (tickets.length >= flight.totalSeats) {
         return null;
     }
-
 
     const createdTicket = await db.Ticket.create({
         flightId: ticket.flightId,
