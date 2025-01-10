@@ -7,6 +7,7 @@ import {
 import userType from "./userType.js";
 import flightType from "./flightType.js";
 import db from "../../models/index.js";
+import { GraphQLDate } from "graphql-compose";
 
 const ticketType = new GraphQLObjectType({
   name: "Ticket",
@@ -35,6 +36,7 @@ const ticketType = new GraphQLObjectType({
         return flight;
       },
     },
+    createdAt: { type: GraphQLDate },
   },
 });
 

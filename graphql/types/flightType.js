@@ -1,4 +1,5 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString} from 'graphql'
+import { GraphQLDate } from 'graphql-compose';
 
 const flightType = new GraphQLObjectType({
     name: 'Flight',
@@ -7,8 +8,8 @@ const flightType = new GraphQLObjectType({
         airline: { type: GraphQLString },
         departure: { type: GraphQLString },
         arrival: { type: GraphQLString },
-        departureTime: { type: GraphQLString },
-        arrivalTime: { type: GraphQLString },
+        departureTime: { type: GraphQLDate },
+        arrivalTime: { type: GraphQLDate },
         duration: { type: GraphQLInt },
         totalSeats: { type: GraphQLInt }
     }

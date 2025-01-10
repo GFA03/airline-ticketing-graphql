@@ -9,6 +9,8 @@ export default (sequelize, DataTypes) => {
     {
       flightId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     {
       sequelize,
