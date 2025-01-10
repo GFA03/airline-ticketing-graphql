@@ -54,7 +54,8 @@ module.exports = {
         references: {
           model: 'Flights',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -62,7 +63,8 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -73,11 +75,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-    
+
     await queryInterface.addConstraint('Tickets', {
       fields: ['userId', 'flightId'],
-      type: 'unique',
-      name: 'unique_user_flight'
+      type: 'primary key',
+      name: 'pk_user_flight'
     });
   },
   async down(queryInterface, Sequelize) {
