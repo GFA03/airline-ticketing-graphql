@@ -1,23 +1,15 @@
+import { createTicket } from '../../core/services/createTicketService.js';
 import ticketInputType from '../types/ticketInputType.js';
-import db from '../../models/index.js';
 import ticketType from '../types/ticketType.js';
 
 const createTicketMutationResolver = async (_, { ticket }, context) => {
     const isAuthorized = !!context.userId
    
     if(!isAuthorized) {
-        return false;
+        return null;
     }
 
-    const userId = context.userId;
-
-
-    const createdTicket = await db.Ticket.create({
-        flightId: ticket.flightId,
-        userId: userId,
-    })
-
-    console.log(createdTicket);
+    const createdTicket = await createTicket(_, { ticket, userId: context.userId }, context);
 
     return createdTicket;
 }
