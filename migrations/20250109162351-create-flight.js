@@ -73,6 +73,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    
+    await queryInterface.addConstraint('Tickets', {
+      fields: ['userId', 'flightId'],
+      type: 'unique',
+      name: 'unique_user_flight'
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Flights');

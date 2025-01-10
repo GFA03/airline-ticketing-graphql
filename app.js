@@ -23,7 +23,6 @@ const jwtMiddleware = (req, res, next) => {
 
     try {
         const decodedPayload = jwt.verify(token, JWT_SECRET);
-        console.log('decodedPayload', decodedPayload);
         req.user_id = decodedPayload.user_id;
         next();
     } catch(e) {
