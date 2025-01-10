@@ -8,10 +8,10 @@ const createFlightMutationResolver = async (_, { flight }, context) => {
         airline: flight.airline,
         departure: flight.departure,
         arrival: flight.arrival,
-        departure_time: flight.departure_time,
-        arrival_time: flight.arrival_time,
+        departureTime: flight.departureTime,
+        arrivalTime: flight.arrivalTime,
         duration: flight.duration,
-        total_seats: flight.total_seats,
+        totalSeats: flight.totalSeats,
     })
 
     return createdFlight;

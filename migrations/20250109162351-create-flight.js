@@ -21,11 +21,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      departure_time: {
+      departureTime: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      arrival_time: {
+      arrivalTime: {
         type: Sequelize.DATE,
         allowNull: false
       },
@@ -33,9 +33,36 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      total_seats: {
+      totalSeats: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.createTable("Tickets", {
+      flightId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Flights',
+          key: 'id'
+        }
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -49,5 +76,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Flights');
+    await queryInterface.dropTable('Tickets');
   }
 };

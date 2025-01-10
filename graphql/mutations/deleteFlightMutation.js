@@ -2,11 +2,11 @@ import {GraphQLBoolean, GraphQLInt} from 'graphql';
 import db from '../../models/index.js';
 
 const deleteFlightResolver = async (_, args, context) => {
-    // const isAuthorized = !!context.userId
+    const isAuthorized = !!context.userId
    
-    // if(!isAuthorized) {
-    //     return false;
-    // }
+    if(!isAuthorized) {
+        return false;
+    }
 
     const flight = await db.Flight.findOne({
         where: {

@@ -6,10 +6,10 @@ const flightInputType = new GraphQLInputObjectType({
         airline: { type: GraphQLString },
         departure: { type: GraphQLString },
         arrival: { type: GraphQLString },
-        departure_time: { type: GraphQLString },
-        arrival_time: { type: GraphQLString },
+        departureTime: { type: GraphQLString },
+        arrivalTime: { type: GraphQLString },
         duration: { type: GraphQLInt },
-        total_seats: { type: GraphQLInt },
+        totalSeats: { type: GraphQLInt },
     }
 });
 

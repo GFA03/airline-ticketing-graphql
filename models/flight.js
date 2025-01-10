@@ -9,7 +9,10 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Flight.belongsToMany(models.User, {
+        through: models.Ticket,
+        foreignKey: "flightId",
+      });
     }
   }
   Flight.init(
@@ -17,10 +20,10 @@ export default (sequelize, DataTypes) => {
       airline: DataTypes.STRING,
       departure: DataTypes.STRING,
       arrival: DataTypes.STRING,
-      departure_time: DataTypes.DATE,
-      arrival_time: DataTypes.DATE,
+      departureTime: DataTypes.DATE,
+      arrivalTime: DataTypes.DATE,
       duration: DataTypes.INTEGER,
-      total_seats: DataTypes.INTEGER,
+      totalSeats: DataTypes.INTEGER,
     },
     {
       sequelize,
