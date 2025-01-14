@@ -7,6 +7,9 @@ import ticketsQuery from '../queries/ticketsQuery.js';
 import ticketQuery from '../queries/ticketQuery.js';
 import availableFlightsQuery from '../queries/availableFlightsQuery.js';
 import userTicketsQuery from '../queries/userTicketsQuery.js';
+import planeQuery from '../queries/planeQuery.js';
+import planesByAirlineQuery from '../queries/planesByAirlineQuery.js';
+import planesQuery from '../queries/planesQuery.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -19,6 +22,9 @@ const queryType = new GraphQLObjectType({
         ticket: ticketQuery,
         tickets: ticketsQuery,
         userTickets: userTicketsQuery,
+        plane: planeQuery,
+        planes: planesQuery,
+        planesByAirline: planesByAirlineQuery,
     },
 });
 

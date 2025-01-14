@@ -6,12 +6,12 @@ const flightType = new GraphQLObjectType({
     fields: {
         id: { type: GraphQLInt },
         airline: { type: GraphQLString },
+        planeId: {type: GraphQLInt},
         departure: { type: GraphQLString },
         arrival: { type: GraphQLString },
         departureTime: { type: GraphQLDate },
         arrivalTime: { type: GraphQLDate },
         duration: { type: GraphQLInt },
-        totalSeats: { type: GraphQLInt }
     }
 });
 

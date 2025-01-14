@@ -32,9 +32,6 @@ const loginMutationResolver = async (_, args) => {
     }
     
     const token = jwt.sign({ user_id: user.id }, JWT_SECRET);
-    console.log(JWT_SECRET);
-    console.log(token);
-    console.log(user.id);
     return {
         token,
     };

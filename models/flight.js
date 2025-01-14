@@ -14,6 +14,13 @@ export default (sequelize, DataTypes) => {
         foreignKey: "flightId",
       });
     }
+    static associate(models) {
+      // Define the many-to-one relationship between Flight and Plane
+      Flight.belongsTo(models.Plane, {
+        foreignKey: 'planeId',   // The foreign key in the Flight model
+        as: 'plane',             // Alias for the relationship (optional)
+      });
+    };
   }
   Flight.init(
     {
@@ -23,7 +30,6 @@ export default (sequelize, DataTypes) => {
       departureTime: DataTypes.DATE,
       arrivalTime: DataTypes.DATE,
       duration: DataTypes.INTEGER,
-      totalSeats: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -17,12 +17,12 @@ module.exports = {
     const mockFlights = new Array(100).fill().map(() => {
       return {
         airline: faker.company.name(),
+        planeId: [1,2,3][Math.floor(Math.random()*3)],
         departure: faker.location.city(),
         arrival: faker.location.city(),
         departureTime: faker.date.soon({ days: 1}),
         arrivalTime: faker.date.soon({ days: 2}),
         duration: Math.floor(Math.random() * 300),
-        totalSeats: Math.floor(Math.random() * 100),
         createdAt: new Date(),
         updatedAt: new Date(),
       }
