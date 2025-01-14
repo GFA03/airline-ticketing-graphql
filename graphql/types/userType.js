@@ -5,6 +5,7 @@ const userType = new GraphQLObjectType({
     fields: {
         id: { type: GraphQLInt },
         name: { type: GraphQLString },
+        role: { type: GraphQLString},
     }
 });
 

@@ -3,7 +3,20 @@ import flightInputType from '../types/flightInputType.js';
 import flightType from '../types/flightType.js';
 import db from '../../models/index.js';
 
-const updateFlightMutationResolver = async (_, args) => {
+const updateFlightMutationResolver = async (_, args,context) => {
+    const isAuthorized = !!context.userId
+    const user = await db.User.findOne({
+        where: {
+            id:context.userId,
+        }
+    });
+
+    if(!isAuthorized) {
+        return false;
+    }
+    if(user.role !== "admin"){
+        return false;
+    }
     const id = args.id;
 
     const flight = await db.Flight.findOne({

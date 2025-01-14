@@ -3,7 +3,19 @@ import db from '../../models/index.js';
 import flightType from '../types/flightType.js';
 
 const createFlightMutationResolver = async (_, { flight }, context) => {
+    const isAuthorized = !!context.userId
+    const user = await db.User.findOne({
+        where: {
+            id:context.userId,
+        }
+    });
 
+    if(!isAuthorized) {
+        return false;
+    }
+    if(user.role !== "admin"){
+        return false;
+    }
     const createdFlight = await db.Flight.create({
         airline: flight.airline,
         departure: flight.departure,

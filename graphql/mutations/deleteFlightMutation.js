@@ -3,8 +3,16 @@ import db from '../../models/index.js';
 
 const deleteFlightResolver = async (_, args, context) => {
     const isAuthorized = !!context.userId
-   
+    const user = await db.User.findOne({
+        where: {
+            id:context.userId,
+        }
+    });
+
     if(!isAuthorized) {
+        return false;
+    }
+    if(user.role !== "admin"){
         return false;
     }
 

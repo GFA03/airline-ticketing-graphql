@@ -5,10 +5,14 @@ import bcrypt from 'bcrypt';
 
 const createUserMutationResolver = async (_, { user }, context) => {
     const password = await bcrypt.hash(user.password, 5);
-
+    let role = user.role
+    if (role!=="admin"){
+        role = "user";
+    }
     const createdUser = await db.User.create({
         name: user.name,
         password: password,
+        role: role
     });
 
     return createdUser;
