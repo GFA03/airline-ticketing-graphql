@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLInt } from 'graphql';
 import PlaneType from '../types/planeType.js';
 import db from '../../models/index.js';
 
@@ -12,7 +12,7 @@ const planeQueryResolver = async(_, { id })=>{
 const planeQuery = {
   type: new GraphQLList(PlaneType),
   args: {
-    company: { type: GraphQLString },
+    id: { type: GraphQLInt},
   },
   resolve: planeQueryResolver
   

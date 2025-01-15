@@ -29,7 +29,7 @@ const availableFlightsQueryResolver = async (_, {}, context) => {
   // Extract flightIds the user has already booked
   const bookedFlightIds = userTickets.map((ticket) => ticket.flightId);
 
-  // Fetch flights excluding booked ones, with available seats, and future departures
+  // Fetch flights excluding booked ones, with future departures
   const availableFlights = await db.Flight.findAll({
     where: {
       id: {
@@ -39,19 +39,47 @@ const availableFlightsQueryResolver = async (_, {}, context) => {
         [Op.gt]: new Date(), // Only future flights
       },
     },
+    include: {
+      model: db.Plane,
+      as: 'plane',
+      attributes: ['numberOfRows', 'numberOfSeatsPerRow'],
+    },
   });
 
   // Filter flights with available seats using Promise.all
   const filteredFlights = await Promise.all(
     availableFlights.map(async (flight) => {
-      const { count } = await db.Ticket.findAndCountAll({
-        where: {
-          flightId: flight.id,
-        },
+      const { numberOfRows, numberOfSeatsPerRow } = flight.plane;
+
+      // Step 1: Generate all possible seat combinations
+      const allSeats = [];
+      for (let i = 1; i <= numberOfRows; i++) {
+        for (let j = 0; j < numberOfSeatsPerRow; j++) {
+          const seat = `${String.fromCharCode(65 + j)}`; // Convert j to 'A', 'B', etc.
+          allSeats.push({ row: i, seat: seat });
+        }
+      }
+
+      // Step 2: Fetch taken seats for the flight
+      const takenSeats = await db.CheckedTicket.findAll({
+        where: { ticketId: flight.id },
+        attributes: ['row', 'seat'],
       });
 
-      // Return true if seats are available
-      return count < flight.totalSeats ? flight : null;
+      const takenSeatSet = new Set(
+        takenSeats.map((seat) => `${seat.row}-${seat.seat}`)
+      );
+
+      // Step 3: Filter available seats
+      const availableSeats = allSeats.filter(
+        (seat) => !takenSeatSet.has(`${seat.row}-${seat.seat}`)
+      );
+
+      // Only return flight if there are available seats
+      if (availableSeats.length > 0) {
+        return flight;
+      }
+      return null;
     })
   );
 

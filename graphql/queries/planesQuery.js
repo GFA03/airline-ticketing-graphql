@@ -9,9 +9,6 @@ const planesQueryResolver = async()=>{
 const planesQuery = {
   type: new GraphQLList(PlaneType),
   description: 'Fetch all planes',
-  args: {
-    company: { type: GraphQLString },
-  },
   resolve: planesQueryResolver
   
 };

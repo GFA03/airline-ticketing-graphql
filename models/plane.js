@@ -18,7 +18,7 @@ export default (sequelize, DataTypes) => {
       airline: DataTypes.STRING,
       model: DataTypes.STRING,
       numberOfRows: DataTypes.INTEGER,
-      numberofSeatsPerRow: DataTypes.INTEGER
+      numberOfSeatsPerRow: DataTypes.INTEGER
     },
     {
       sequelize,
