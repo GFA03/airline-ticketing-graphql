@@ -34,6 +34,12 @@ module.exports = {
         allowNull: false,
       },
     });
+    
+    await queryInterface.addConstraint('CheckedTickets', {
+      fields: ['ticketId'],
+      type: 'unique',
+      name: 'unique_ticketId_constraint', // Optional name for the constraint
+    });
   },
 
   async down(queryInterface, Sequelize) {
