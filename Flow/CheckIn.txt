@@ -15,6 +15,7 @@ mutation Login{
 
 query getMyTickets{
   userTickets {
+    id
     buyer {
       id
       name
@@ -34,7 +35,7 @@ query getMyTickets{
 
 
 query getAvailableSeats{
-  availableSeatsForFlight(flightId: 1) {
+  availableSeatsForFlight(flightId: 2) {
     row
     seat
   }
@@ -42,7 +43,7 @@ query getAvailableSeats{
 
 mutation createCheckedTicket{
   createCheckedTicket(checkedTicket: {
-    ticketId: 1,
+    ticketId: 9,
     row: 1,
     seat: "A"
   }) {
@@ -92,6 +93,44 @@ query checkedTicketsForUser{
     }
     row
     seat
+    createdAt
+  }
+}
+query user3{
+  user(id: 3) {
+    id
+    name
+    role
+  }
+}
+# Logare pe platforma
+mutation Login2{
+  login(credentials: { username: "Sister.Ryan", password: "aaaa" }) {
+    token
+  }
+}
+
+
+mutation createTicket{
+  createTicket(ticket: {
+    flightId: 2,
+    
+  }) {
+    id
+    buyer {
+      id
+      name
+      role
+    }
+    flight {
+      id
+      airline
+      departure
+      arrival
+      departureTime
+      arrivalTime
+      duration
+    }
     createdAt
   }
 }
