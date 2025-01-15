@@ -32,8 +32,12 @@ const availableSeatsForFlightQueryResolver = async (_, { flightId }) => {
   
       // Step 3: Fetch taken seats for the flight
       const takenSeats = await db.CheckedTicket.findAll({
-        where: { ticketId: flightId },
-        attributes: ['row', 'seat'],
+              
+              attributes: ['row', 'seat'],
+              include:{
+                  model: db.Ticket,
+                  where: {flightId: flightId}
+              }
       });
   
       const takenSeatSet = new Set(
