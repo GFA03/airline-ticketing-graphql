@@ -34,7 +34,7 @@ query getMyTickets{
 
 
 query getAvailableSeats{
-  availableSeats(flightId: 1) {
+  availableSeatsForFlight(flightId: 1) {
     row
     seat
   }

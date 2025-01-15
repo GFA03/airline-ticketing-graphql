@@ -1,5 +1,5 @@
 query user{
-  user(id: 1) {
+  user(id: 2) {
     id
     name
     role
