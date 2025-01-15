@@ -1,9 +1,9 @@
-import { GraphQLNonNull } from 'graphql';
 import PlaneType from '../types/planeType.js';
 import PlaneInputType from '../types/planeInputType.js';
 import db from '../../models/index.js';
 const createPlaneMutationResolver = async (_, { plane }, context) => {
     const isAuthorized = !!context.userId
+    
     const user = await db.User.findOne({
         where: {
             id:context.userId,
@@ -23,7 +23,7 @@ const createPlaneMutation = {
   type: PlaneType,
   description: 'Create a new plane',
   args: {
-    input: { type: new GraphQLNonNull(PlaneInputType) },
+    plane: { type: PlaneInputType },
   },
   resolve: createPlaneMutationResolver,
 };

@@ -32,17 +32,6 @@ export const createTicket = async (_, { ticket, userId }, context) => {
         return null;
     }
 
-    // Check if there are any seats left for the flight
-    const tickets = await db.Ticket.findAll({
-        where: {
-            flightId: ticket.flightId,
-        }
-    });
-
-    if (tickets.length >= flight.totalSeats) {
-        return null;
-    }
-
     const createdTicket = await db.Ticket.create({
         flightId: ticket.flightId,
         userId: userId,
