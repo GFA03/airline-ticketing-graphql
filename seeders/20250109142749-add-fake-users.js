@@ -16,7 +16,6 @@ module.exports = {
         updatedAt: new Date(),
       }
     });
-    console.log(mockUsers[1]);
 
     await queryInterface.bulkInsert('Users', mockUsers, {});
   },

@@ -6,7 +6,8 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsToMany(models.Flight, {
         through: models.Ticket,
-        foreignKey: 'userId',
+        uniqueKey: 'ticketId',
+        foreignKey: 'userId'
       });
     }
   }

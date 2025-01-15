@@ -9,10 +9,7 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        Plane.hasMany(models.Flight, {
-            foreignKey: 'planeId',  
-            as: 'flights',          
-          });
+        Plane.hasMany(models.Flight);
       }
   }
   Plane.init(

@@ -11,6 +11,7 @@ import deleteTicketMutation from '../mutations/deleteTicketMutation.js';
 import updatePlaneMutation from '../mutations/updatePlaneMutation.js';
 import deletePlaneMutation from '../mutations/deleteFlightMutation.js';
 import createPlaneMutation from '../mutations/createPlaneMutation.js';
+import createCheckedTicketMutation from '../mutations/createCheckedTicketMutation.js';
 
 // Define the Mutation type
 const mutationType = new graphql.GraphQLObjectType({
@@ -28,6 +29,7 @@ const mutationType = new graphql.GraphQLObjectType({
         updatePlane: updatePlaneMutation,
         deletePlane: deletePlaneMutation,
         createPlane: createPlaneMutation,
+        createCheckedTicket: createCheckedTicketMutation
     }
 });
 

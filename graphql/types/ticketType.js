@@ -12,6 +12,7 @@ import { GraphQLDate } from "graphql-compose";
 const ticketType = new GraphQLObjectType({
   name: "Ticket",
   fields: {
+    id: {type: GraphQLInt},
     buyer: {
       type: userType,
       resolve: async (ticket) => {
