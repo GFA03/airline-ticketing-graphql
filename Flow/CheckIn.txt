@@ -1,0 +1,97 @@
+query user{
+  user(id: 1) {
+    id
+    name
+    role
+  }
+}
+# Logare pe platforma
+mutation Login{
+  login(credentials: { username: "Everette_OKon3", password: "aaaa" }) {
+    token
+  }
+}
+
+
+query getMyTickets{
+  userTickets {
+    buyer {
+      id
+      name
+    }
+    flight {
+      id
+      airline
+      departure
+      arrival
+      departureTime
+      arrivalTime
+      duration
+    }
+    createdAt
+  }
+}
+
+
+query getAvailableSeats{
+  availableSeats(flightId: 1) {
+    row
+    seat
+  }
+}
+
+mutation createCheckedTicket{
+  createCheckedTicket(checkedTicket: {
+    ticketId: 1,
+    row: 1,
+    seat: "A"
+  }) {
+    id
+    ticket {
+      id
+      buyer {
+        id
+        name
+      }
+      flight {
+        id
+        airline
+        departure
+        arrival
+        departureTime
+        arrivalTime
+        duration
+      }
+      createdAt
+    }
+    row
+    seat
+    createdAt
+  }
+}
+
+query checkedTicketsForUser{
+  checkedTicketsForUser {
+    id
+    ticket {
+      id
+      buyer {
+        id
+        name
+      }
+      flight {
+        id
+        airline
+        departure
+        arrival
+        departureTime
+        arrivalTime
+        duration
+      }
+      createdAt
+    }
+    row
+    seat
+    createdAt
+  }
+}

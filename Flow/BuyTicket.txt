@@ -1,0 +1,69 @@
+query user{
+  user(id: 1) {
+    id
+    name
+    role
+  }
+}
+# Logare pe platforma
+mutation Login{
+  login(credentials: { username: "Everette_OKon3", password: "aaaa" }) {
+    token
+  }
+}
+
+# Vederea biletelor de avion valabile
+query getAvailableFlights {
+  availableFlights {
+    id
+    airline
+    departure
+    arrival
+    departureTime
+    arrivalTime
+    duration
+  }
+}
+
+# Cumpararea unui bilet
+mutation buyTicket{
+  createTicket(ticket: {
+    flightId: 64
+  }) {
+    buyer {
+      id
+      name
+    }
+    flight {
+      id
+      airline
+      departure
+      arrival
+      departureTime
+      arrivalTime
+      duration
+    }
+  }
+}
+
+# Vizionarea biletelor cumparate
+query getMyTickets{
+  userTickets {
+    buyer {
+      id
+      name
+    }
+    flight {
+      id
+      airline
+      departure
+      arrival
+      departureTime
+      arrivalTime
+      duration
+    }
+    createdAt
+  }
+}
+
+
